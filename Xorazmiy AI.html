@@ -1,0 +1,425 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Xorazmiy AI (Copy)</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Professoringiz ma'ruzalari asosida, o'zbek tilida va manbalar bilan javob beradigan AI ustoz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: Xiva majolikasi — oq-ko'k sopol fon, girih naqsh, firuza va lojuvard; markazda jonli agent demosi */
+:root{
+  --bg:#F2F6F7; --surface:#FFFFFF; --ink:#0D1B33; --muted:#4B5B70; --line:#D5E0E4;
+  --lojuvard:#173B8C; --firuza:#0F8C88; --oltin:#C98A1B; --warn-bg:#FFF4DE; --warn-ink:#7A4A00;
+  --hero:#0D1B33; --hero-ink:#EAF3F5; --hero-muted:#A9BED0; --tile:rgba(23,59,140,.07);
+  --f-display:'Unbounded', 'Arial Black', system-ui, sans-serif;
+  --f-body:'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --f-mono:'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1424; --surface:#111F36; --ink:#E7EFF5; --muted:#A3B4C6; --line:#22344F;
+  --lojuvard:#7FA4FF; --firuza:#3FC9C2; --oltin:#E8B04B; --warn-bg:#3A2A0C; --warn-ink:#FFD48A;
+  --hero:#06101F; --hero-ink:#EAF3F5; --hero-muted:#A9BED0; --tile:rgba(127,164,255,.06); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1424; --surface:#111F36; --ink:#E7EFF5; --muted:#A3B4C6; --line:#22344F;
+  --lojuvard:#7FA4FF; --firuza:#3FC9C2; --oltin:#E8B04B; --warn-bg:#3A2A0C; --warn-ink:#FFD48A;
+  --hero:#06101F; --hero-ink:#EAF3F5; --hero-muted:#A9BED0; --tile:rgba(127,164,255,.06); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:600 12px/1 var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:var(--firuza)}
+.mono{font-family:var(--f-mono);font-size:.85em}
+:focus-visible{outline:3px solid var(--oltin);outline-offset:3px;border-radius:6px}
+
+/* ---------- Hero ---------- */
+.hero{background:var(--hero);color:var(--hero-ink);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.18;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%233FC9C2' stroke-width='1.2'%3E%3Cpath d='M48 8l11 29 29 11-29 11-11 29-11-29L8 48l29-11z'/%3E%3Cpath d='M48 22l19 7 7 19-7 19-19 7-19-7-7-19 7-19z'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3Cpath d='M0 0l8 8M96 0l-8 8M0 96l8-8M96 96l-8-8'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:96px 96px;mask-image:linear-gradient(115deg,#000 0%,transparent 70%)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px;position:relative}
+.logo{display:flex;align-items:center;gap:10px;font:800 18px/1 var(--f-display);text-decoration:none}
+.logo svg{width:30px;height:30px}
+.nav nav{display:flex;gap:22px;font-size:14px;color:var(--hero-muted)}
+.nav nav a{text-decoration:none}
+.nav nav a:hover{color:var(--hero-ink)}
+.team-badge{font:600 12px/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(169,190,208,.35);padding:8px 12px;border-radius:999px;color:var(--hero-muted)}
+.hero-grid{display:grid;grid-template-columns:1.02fr 1fr;gap:48px;align-items:center;padding-block:40px 72px;position:relative}
+.hero h1{font-size:clamp(32px,4.6vw,58px);font-weight:800}
+.hero h1 em{font-style:normal;color:#3FC9C2}
+.lead{font-size:clamp(17px,1.5vw,19px);color:var(--hero-muted);max-width:52ch;margin-top:20px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 15px/1 var(--f-body);padding:15px 22px;border-radius:12px;text-decoration:none;border:0;cursor:pointer}
+.btn-main{background:#3FC9C2;color:#06201F}
+.btn-main:hover{background:#5ED8D2}
+.btn-ghost{background:transparent;color:var(--hero-ink);border:1px solid rgba(169,190,208,.4)}
+.heritage{display:flex;gap:14px;align-items:center;margin-top:34px;font-size:13px;color:var(--hero-muted)}
+.heritage b{font-family:var(--f-mono);color:#E8B04B;font-weight:500}
+
+/* ---------- Demo ---------- */
+.demo{background:#F7FAFB;color:#0D1B33;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden;min-width:0}
+.demo-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid #DCE6EA;font-size:13px}
+.demo-top b{font-weight:700}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#0F6E6A;font-weight:600}
+.live::before{content:"";width:8px;height:8px;border-radius:50%;background:#0F8C88}
+.qs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px 4px}
+.q{font:600 13px/1.3 var(--f-body);border:1px solid #C9D7DD;background:#fff;color:#0D1B33;padding:9px 12px;border-radius:10px;cursor:pointer;text-align:left}
+.q[aria-pressed="true"]{background:#173B8C;border-color:#173B8C;color:#fff}
+.chat{padding:14px 18px 18px;display:flex;flex-direction:column;gap:12px;min-height:420px}
+.msg-user{align-self:flex-end;background:#173B8C;color:#fff;padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:14px;max-width:85%}
+.steps{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:#4B5B70}
+.step{display:flex;gap:8px;align-items:baseline;opacity:.35;transition:opacity .25s}
+.step.on{opacity:1}
+.step .dot{width:16px;flex:none;font-family:var(--f-mono);color:#0F8C88;font-weight:700}
+.step.skip .dot{color:#9AA9B5}
+.step .t{font-family:var(--f-mono);font-size:11px;color:#8A99A6;margin-left:auto;white-space:nowrap}
+.answer{background:#fff;border:1px solid #DCE6EA;border-radius:4px 14px 14px 14px;padding:14px 16px;font-size:14.5px;line-height:1.55;display:flex;flex-direction:column;gap:10px}
+.answer .ref{font-family:var(--f-mono);font-size:11.5px;background:#E3F3F2;color:#0B5E5B;padding:1px 5px;border-radius:5px;white-space:nowrap}
+.answer .ref.w{background:#E6ECFA;color:#173B8C}
+.conflict{background:#FFF4DE;color:#5E3900;border-radius:10px;padding:10px 12px;font-size:13.5px}
+.conflict b{display:block;margin-bottom:2px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 11.5px/1 var(--f-body);padding:6px 9px;border-radius:999px;background:#EEF3F5;color:#33475C}
+.chip.g{background:#DFF3EE;color:#0B5E4B}.chip.y{background:#FFF0CF;color:#6E4600}
+.disclaim{font-size:11.5px;color:#6B7B8A;padding:0 18px 14px}
+
+/* ---------- Sections ---------- */
+section{padding-block:88px}
+.sec-head{display:flex;flex-direction:column;gap:14px;max-width:760px;margin-bottom:40px}
+.sec-head h2{font-size:clamp(26px,3.2vw,40px);font-weight:700}
+.sec-head p{color:var(--muted);font-size:17px;max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink)}
+.stat{padding:22px 20px 6px 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.stat+.stat{padding-left:20px;border-left:1px solid var(--line)}
+.stat .n{font:800 clamp(28px,3.4vw,44px)/1 var(--f-display);color:var(--lojuvard);font-variant-numeric:tabular-nums}
+.stat .l{color:var(--muted);font-size:14.5px}
+.src{font-size:12.5px;color:var(--muted);margin-top:18px}
+.pains{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+.pain{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:6px}
+.pain h3{font-size:17px;font-weight:700}
+.pain p{color:var(--muted);font-size:15px}
+
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;counter-reset:s}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 16px;display:flex;flex-direction:column;gap:8px;position:relative;min-width:0}
+.node .k{font:700 12px/1 var(--f-mono);color:var(--firuza)}
+.node h3{font-size:15px;font-weight:700;font-family:var(--f-body)}
+.node p{font-size:13.5px;color:var(--muted)}
+.node.key{background:var(--lojuvard);border-color:var(--lojuvard)}
+.node.key h3,.node.key p,.node.key .k{color:#fff}
+.loop{margin-top:16px;font-size:14px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.loop span{border:1px dashed var(--line);border-radius:999px;padding:6px 12px}
+
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.role h3{font-size:20px;font-weight:700;margin-bottom:12px}
+.role ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.role li{padding-left:22px;position:relative;color:var(--muted);font-size:15px}
+.role li::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;background:var(--firuza);transform:rotate(45deg)}
+
+.compare{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line)}
+th{font:700 13px/1.2 var(--f-body);letter-spacing:.04em;color:var(--muted)}
+th.us,td.us{background:color-mix(in srgb, var(--firuza) 10%, transparent);font-weight:600}
+tr:last-child td{border-bottom:0}
+.yes{color:var(--firuza);font-weight:700}.no{color:var(--muted)}
+
+.channels{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ch{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.ch .st{align-self:flex-start;font:700 11.5px/1 var(--f-body);padding:6px 9px;border-radius:999px}
+.st.ready{background:#DFF3EE;color:#0B5E4B}.st.plan{background:#FFF0CF;color:#6E4600}
+.ch h3{font-size:18px;font-weight:700}
+.ch p{color:var(--muted);font-size:15px}
+
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--surface);display:flex;flex-direction:column;gap:12px}
+.price.hl{border:2px solid var(--lojuvard)}
+.price .amt{font:800 30px/1 var(--f-display);color:var(--lojuvard)}
+.price .amt small{font:500 14px var(--f-body);color:var(--muted)}
+.price h3{font-size:16px;font-family:var(--f-body);font-weight:700}
+.price p,.price li{color:var(--muted);font-size:14.5px}
+.price ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+
+.road{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink)}
+.r{padding:18px 18px 0 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.r+.r{padding-left:18px;border-left:1px solid var(--line)}
+.r .when{font:700 13px/1 var(--f-mono);color:var(--oltin)}
+.r h3{font-size:17px;font-family:var(--f-body);font-weight:700}
+.r p{color:var(--muted);font-size:14.5px}
+.r.now .when{color:var(--firuza)}
+
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.member{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.mono-tile{width:100%;aspect-ratio:1/1;max-width:100%;border-radius:16px;display:grid;place-items:center;font:800 clamp(28px,4vw,48px)/1 var(--f-display);color:#fff;position:relative;overflow:hidden}
+.mono-tile::after{content:"";position:absolute;inset:0;opacity:.22;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 96 96'%3E%3Cpath d='M48 8l11 29 29 11-29 11-11 29-11-29L8 48l29-11z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E");background-size:48px}
+.member h3{font-size:16px;font-family:var(--f-body);font-weight:700}
+.member p{font-size:13.5px;color:var(--muted)}
+
+.final{background:var(--hero);color:var(--hero-ink);text-align:left}
+.final h2{font-size:clamp(28px,4vw,52px);font-weight:800;max-width:18ch}
+.final p{color:var(--hero-muted);max-width:56ch;margin-top:16px;font-size:17px}
+footer{background:var(--hero);color:var(--hero-muted);font-size:13px;padding-block:22px;border-top:1px solid rgba(169,190,208,.15)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .flow{grid-template-columns:repeat(3,1fr)}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .nav nav{display:none}
+}
+@media (max-width:720px){
+  section{padding-block:60px}
+  .stats,.road{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3),.r:nth-child(3){padding-left:0;border-left:0}
+  .pains,.roles,.channels,.prices{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="nav">
+      <a class="logo" href="#top" aria-label="Xorazmiy AI">
+        <svg viewBox="0 0 96 96" aria-hidden="true"><path d="M48 6l12 30 30 12-30 12-12 30-12-30L6 48l30-12z" fill="#3FC9C2"/><path d="M48 30l7 11 11 7-11 7-7 11-7-11-11-7 11-7z" fill="#0D1B33"/></svg>
+        Xorazmiy AI
+      </a>
+      <nav aria-label="Bo'limlar"><a href="#muammo">Muammo</a><a href="#qanday">Qanday ishlaydi</a><a href="#narx">Narx</a><a href="#jamoa">Jamoa</a></nav>
+      <span class="team-badge">Elevate jamoasi</span>
+    </div>
+    <div class="hero-grid" id="top">
+      <div>
+        <p class="eyebrow" style="color:#3FC9C2">Ideathon 2026 · Xorazm</p>
+        <h1 style="margin-top:16px">Algoritmni dunyoga Xorazm bergan. Endi har bir talabaning <em>AI ustozi</em> bor.</h1>
+        <p class="lead">Talaba o'z professorini tanlaydi va savol beradi. Xorazmiy AI aynan o'sha professorning ma'ruzalari asosida, o'zbek tilida javob beradi, har bir faktga manba ko'rsatadi va ma'ruza internetdagi ma'lumotga zid bo'lsa ogohlantiradi.</p>
+        <div class="cta">
+          <a class="btn btn-main" href="#demo">Demoni sinab ko'ring ↓</a>
+          <a class="btn btn-ghost" href="#qanday">Qanday ishlaydi</a>
+        </div>
+        <p class="heritage"><b>c. 820</b> al-Xorazmiy «al-jabr» asarini yozdi &nbsp;→&nbsp; <b>XII asr</b> «Algoritmi» tarjimasi &nbsp;→&nbsp; <b>2026</b> Xorazmiy AI</p>
+      </div>
+
+      <div class="demo" id="demo" aria-label="Jonli namuna">
+        <div class="demo-top">
+          <span id="subj"><b>AT tarixi</b> · Dots. A. Karimov</span>
+          <span class="live">namuna</span>
+        </div>
+        <div class="qs" role="group" aria-label="Namuna savollar">
+          <button class="q" id="q-0" aria-pressed="true" data-i="0">Algoritm so'zi qayerdan kelgan?</button>
+          <button class="q" id="q-1" aria-pressed="false" data-i="1">Birinchi iPhone qachon chiqqan?</button>
+          <button class="q" id="q-2" aria-pressed="false" data-i="2">Masalani yechib ber 🧭</button>
+        </div>
+        <div class="chat" id="chat" aria-live="polite"></div>
+        <p class="disclaim">Namuna javoblar. Haqiqiy tizim aynan shu agentlar ketma-ketligi bilan ishlaydi.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="muammo">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Muammo</p>
+        <h2>1,5 million talaba AI'dan so'raydi. Javob ularning professoriga mos emas.</h2>
+        <p>Umumiy chatbotlar ma'ruzani, fan dasturini va o'qituvchi talablarini bilmaydi. Javob manbasiz, o'zbek tilida esa ko'pincha tarjimadan chiqqan.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="n">1 535 000</span><span class="l">OTM talabasi, 2025/2026 o'quv yili boshida</span></div>
+        <div class="stat"><span class="n">215</span><span class="l">oliy ta'lim tashkiloti faoliyat yuritmoqda</span></div>
+        <div class="stat"><span class="n">65 900</span><span class="l">talaba Xorazm viloyatida</span></div>
+        <div class="stat"><span class="n">8</span><span class="l">OTM Xorazmda: 5 davlat, 3 nodavlat</span></div>
+      </div>
+      <p class="src">Manbalar: O'zbekiston Milliy statistika qo'mitasi (stat.uz), talimxabarlari.uz, infoedu.uz.</p>
+      <div class="pains">
+        <div class="pain"><h3>Kontekst yo'q</h3><p>Chatbot professor ishlatgan atama, misol va talablarni bilmaydi, imtihonda boshqa javob kutiladi.</p></div>
+        <div class="pain"><h3>Manba yo'q</h3><p>Javobni tekshirib bo'lmaydi. To'qima faktlar talabaning bilimiga xato bo'lib o'rnashadi.</p></div>
+        <div class="pain"><h3>Tayyor javob ko'chiriladi</h3><p>Talaba masalani tushunmasdan topshiradi. Akademik halollik va bilim sifati pasayadi.</p></div>
+        <div class="pain"><h3>O'qituvchi ko'rmaydi</h3><p>Guruh qaysi mavzuni tushunmayotganini o'qituvchi imtihongacha bilmaydi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="qanday" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Qanday ishlaydi</p>
+        <h2>Oltita agent bir-birini tekshiradi</h2>
+        <p>LangGraph asosidagi multi-agent tizim. Internetga faqat professor materiallari yetmaganda chiqadi, oxirida esa javobni manbalarga solishtirib o'zi tekshiradi.</p>
+      </div>
+      <div class="flow">
+        <div class="node"><span class="k">01</span><h3>So'rov tahlili</h3><p>Til, maqsad va qidiruv so'rovlarini aniqlaydi, suhbat tarixini hisobga oladi</p></div>
+        <div class="node"><span class="k">02</span><h3>Professor bazasi</h3><p>Ma'ruza, qo'llanma va slaydlardan gibrid qidiruv: kalit so'z va ma'no bo'yicha</p></div>
+        <div class="node"><span class="k">03</span><h3>Baholovchi</h3><p>Topilgan parchalar yetarlimi? Yetmasa so'rovni qayta yozadi</p></div>
+        <div class="node"><span class="k">04</span><h3>Web-qidiruv</h3><p>Faqat kerak bo'lganda: haqiqiy sahifalar, havolalar bilan</p></div>
+        <div class="node"><span class="k">05</span><h3>Javob</h3><p>Professor uslubida, o'zbek tilida, har bir faktga [P1] [W1] havolasi</p></div>
+        <div class="node key"><span class="k">06</span><h3>Fakt-tekshiruv</h3><p>Asossiz gapni topsa javobni qayta yozadi, ziddiyatni ko'rsatadi</p></div>
+      </div>
+      <div class="loop"><span>↺ so'rovni qayta yozish sikli</span><span>↺ o'zini tuzatish sikli</span><span>Gemini · OpenAI · Claude bilan ishlaydi</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Kimga nima beradi</p>
+        <h2>Uch tomon uchun bitta platforma</h2>
+      </div>
+      <div class="roles">
+        <div class="role"><h3>Talaba</h3><ul><li>24/7 o'z professori tilida tushuntirish</li><li>Sokratik rejim: tayyor javob o'rniga yo'naltiruvchi savollar</li><li>Mavzu bo'yicha test, tushuntirish bilan</li><li>O'zbek, rus, ingliz va qoraqalpoq tillarida</li></ul></div>
+        <div class="role"><h3>O'qituvchi</h3><ul><li>PDF, DOCX, slaydlarni yuklaydi, tizim 1 daqiqada o'rganadi</li><li>O'z o'qitish uslubini belgilaydi</li><li>«Bilim bo'shliqlari»: talabalar so'ragan, ma'ruzada yo'q mavzular</li><li>Takroriy savollarga sarflanadigan vaqt tejaladi</li></ul></div>
+        <div class="role"><h3>OTM</h3><ul><li>Fanlar kesimida ta'lim sifati ko'rsatkichlari</li><li>Akademik halollikni qo'llab-quvvatlaydi</li><li>REST API orqali HEMIS va Moodle'ga ulash imkoni</li><li>Ma'lumotlar OTM serverida saqlanishi mumkin</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Farqimiz</p>
+        <h2>Umumiy chatbot emas, professorning raqamli yordamchisi</h2>
+      </div>
+      <div class="compare">
+        <table>
+          <tr><th>Imkoniyat</th><th>Umumiy chatbotlar</th><th class="us">Xorazmiy AI</th></tr>
+          <tr><td>Professor ma'ruzalari asosida javob</td><td class="no">Yo'q</td><td class="us yes">Ha</td></tr>
+          <tr><td>Har bir faktga manba</td><td class="no">Har doim emas</td><td class="us yes">Ha, sahifa va havola bilan</td></tr>
+          <tr><td>Ma'ruza va internet ziddiyatini ko'rsatish</td><td class="no">Yo'q</td><td class="us yes">Ha</td></tr>
+          <tr><td>Javobni o'zi tekshirib qayta yozish</td><td class="no">Yo'q</td><td class="us yes">Ha</td></tr>
+          <tr><td>Sokratik rejim (akademik halollik)</td><td class="no">Yo'q</td><td class="us yes">Ha</td></tr>
+          <tr><td>O'qituvchi uchun analitika</td><td class="no">Yo'q</td><td class="us yes">Ha</td></tr>
+          <tr><td>Telegram ichida ishlash</td><td class="no">Qisman</td><td class="us yes">Ha</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Kanallar</p>
+        <h2>Talaba qayerda bo'lsa, ustoz o'sha yerda</h2>
+      </div>
+      <div class="channels">
+        <div class="ch"><span class="st ready">Tayyor</span><h3>Veb-platforma</h3><p>Talaba chati, test, o'qituvchi paneli va analitika.</p></div>
+        <div class="ch"><span class="st ready">Tayyor</span><h3>Telegram-bot</h3><p>Fan tanlash, savol-javob, Telegram quiz testlari, Sokratik rejim.</p></div>
+        <div class="ch"><span class="st plan">Pilotda</span><h3>HEMIS / Moodle</h3><p>REST API tayyor. Integratsiya hamkor OTM bilan pilot davomida.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="narx" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Biznes model</p>
+        <h2>Talabaga bepul. OTM to'laydi.</h2>
+        <p>Asosiy xarajat LLM so'rovlari. Pilot Gemini'ning bepul tarifidan boshlanadi, xarajat talabalar soniga qarab o'sadi.</p>
+      </div>
+      <div class="prices">
+        <div class="price"><h3>Boshlang'ich</h3><div class="amt">0 <small>so'm</small></div><ul><li>1 o'qituvchi, 1 fan</li><li>Kuniga 30 ta savol</li><li>Telegram-bot</li></ul></div>
+        <div class="price hl"><h3>OTM obunasi</h3><div class="amt">2 000 <small>so'm / talaba / oy</small></div><ul><li>Cheksiz fanlar va o'qituvchilar</li><li>Analitika va bilim bo'shliqlari</li><li>Sokratik rejim va testlar</li></ul></div>
+        <div class="price"><h3>Integratsiya</h3><div class="amt">Kelishilgan</div><ul><li>HEMIS, Moodle ulash</li><li>OTM serverida o'rnatish</li><li>O'qituvchilar uchun trening</li></ul></div>
+      </div>
+      <p class="src">Hisob: Xorazmdagi 65 900 talaba × 2 000 so'm × 10 oy ≈ 1,3 mlrd so'm/yil. Butun O'zbekiston bo'yicha ≈ 30,7 mlrd so'm/yil.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Yo'l xaritasi</p>
+        <h2>MVP tayyor. Keyingi qadam Xorazmda pilot.</h2>
+      </div>
+      <div class="road">
+        <div class="r now"><span class="when">2026 · okt</span><h3>MVP</h3><p>Veb-platforma, Telegram-bot, 6 agentli tizim ishlaydi</p></div>
+        <div class="r"><span class="when">2027 · 1-chorak</span><h3>Pilot</h3><p>Xorazmdagi 1 OTM, 3 fan, talabalar fikri va o'lchovlar</p></div>
+        <div class="r"><span class="when">2027 · 2-chorak</span><h3>Integratsiya</h3><p>HEMIS va Moodle, OTM obunasi bilan ilk daromad</p></div>
+        <div class="r"><span class="when">2027 · 2-yarim</span><h3>Kengayish</h3><p>Xorazmdagi 8 OTM, so'ng boshqa viloyatlar</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jamoa" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Jamoa</p>
+        <h2>Elevate</h2>
+        <p>Xorazmdan chiqqan jamoa: ta'lim muammosini ichidan biladigan talaba va yosh mutaxassislar.</p>
+      </div>
+      <div class="team">
+        <div class="member"><div class="mono-tile" style="background:#173B8C">SA</div><h3>Saidmuratova Aziza</h3><p>Elevate jamoasi</p></div>
+        <div class="member"><div class="mono-tile" style="background:#0F8C88">YS</div><h3>Yuldosheva Sarvinoz</h3><p>Elevate jamoasi</p></div>
+        <div class="member"><div class="mono-tile" style="background:#B07510">MM</div><h3>Maqsudov Mushtariy</h3><p>Elevate jamoasi</p></div>
+        <div class="member"><div class="mono-tile" style="background:#0D1B33">OS</div><h3>Otajanov Sobirjon</h3><p>Elevate jamoasi</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Al-Xorazmiy yurtidan har bir talabaga AI ustoz.</h2>
+      <p>Pilot uchun hamkor OTM va o'z ma'ruzalarini yuklashga tayyor o'qituvchilarni izlayapmiz.</p>
+      <div class="cta"><a class="btn btn-main" href="#demo">Demoni qayta ko'rish ↑</a></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>© 2026 Xorazmiy AI · Elevate jamoasi</span><span>Ideathon 2026 · Xorazm viloyati bosqichi</span></div></footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STEPS = ["So'rov tahlili","Professor bazasidan qidiruv","Relevantlik baholovchi","Web-qidiruv","Javob generatori","Fakt-tekshiruv"];
+  const S = [
+    { subj:"<b>AT tarixi</b> · Dots. A. Karimov", q:"Algoritm so'zi qayerdan kelib chiqqan?",
+      steps:[["til: uz · maqsad: tushuntirish","0.4s"],["3 ta parcha topildi","0.3s"],["qamrov: to'liq","0.5s"],null,["oddiy rejim, o'zbekcha","1.8s"],["asoslangan · ishonch 94%","0.9s"]],
+      answer:`<p>«Algoritm» so'zi Xorazmda tug'ilgan olim <b>Muhammad al-Xorazmiy</b> nomidan kelib chiqqan <span class="ref">P1</span>. Uning hind raqamlari haqidagi asari XII asrda lotinchaga «Algoritmi de numero Indorum» nomi bilan tarjima qilingan, «Algoritmi» olim nomining lotincha shakli <span class="ref">P1</span>.</p><p>Shuningdek, «al-jabr» asari nomidan «algebra» atamasi kelib chiqqan <span class="ref">P1</span>.</p>`,
+      chips:[["g","Ma'ruza to'liq yoritadi"],["","Ishonch 94%"],["","📄 01_al_xorazmiy.pdf, 1-bet"]] },
+    { subj:"<b>AT tarixi</b> · Dots. A. Karimov", q:"Birinchi iPhone qachon chiqqan?",
+      steps:[["til: uz · maqsad: tushuntirish","0.4s"],["2 ta parcha topildi","0.3s"],["qamrov: qisman","0.5s"],["3 ta manba topildi","1.6s"],["oddiy rejim, o'zbekcha","1.9s"],["1 ta ziddiyat · ishonch 88%","1.1s"]],
+      answer:`<p>Birinchi iPhone <b>2007-yil yanvarida</b> taqdim etilgan <span class="ref w">W1</span> va sensorli smartfonlar davrini boshlab bergan <span class="ref">P2</span>.</p><div class="conflict"><b>⚠ Ma'ruza va internet o'rtasida ziddiyat</b>Ma'ruzada: 2008-yil <span class="ref">P2</span> · Internetda: 2007-yil 9-yanvar <span class="ref w">W1</span>. Ishonchli manbalarga ko'ra to'g'ri sana 2007.</div>`,
+      chips:[["y","Ma'ruza + internet"],["","Ishonch 88%"],["","🌐 3 ta web manba"]] },
+    { subj:"<b>Algoritmlar</b> · Prof. D. Rahimova", q:"1 000 000 elementli saralangan massivda binar qidiruv nechta qadam qiladi? Yechib ber.",
+      steps:[["maqsad: tayyor yechim → Sokratik","0.4s"],["2 ta parcha topildi","0.3s"],["qamrov: to'liq","0.4s"],null,["Sokratik rejim","1.7s"],["asoslangan · ishonch 91%","0.8s"]],
+      answer:`<p>Javobni o'zingiz topishingiz uchun yo'l ko'rsataman 🧭</p><p><b>1.</b> Binar qidiruvda har qadamda qidiruv sohasi <b>ikki marta</b> qisqaradi <span class="ref">P1</span>.<br><b>2.</b> Demak, savol: 1 000 000 ni necha marta 2 ga bo'lsak, 1 ga yetamiz?<br><b>3.</b> Maslahat: 2¹⁰ = 1024 ga teng.</p><p><b>Sizga savol:</b> 2²⁰ taxminan nechaga teng? Shundan qadamlar sonini topa olasizmi?</p>`,
+      chips:[["g","Sokratik rejim"],["","Ishonch 91%"],["","📄 01_murakkablik.pdf"]] }
+  ];
+  const chat = document.getElementById('chat');
+  const btns = document.querySelectorAll('.q');
+  let run = 0;
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+
+  async function play(i){
+    const id = ++run, s = S[i];
+    btns.forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.i === i)));
+    chat.innerHTML = '';
+    document.getElementById('subj').innerHTML = s.subj;
+    const u = document.createElement('div'); u.className = 'msg-user'; u.textContent = s.q; chat.appendChild(u);
+    const list = document.createElement('div'); list.className = 'steps';
+    list.innerHTML = STEPS.map((n,k) => {
+      const st = s.steps[k];
+      return `<div class="step${st ? '' : ' skip'}"><span class="dot">${st ? '✓' : '–'}</span><span><b>${n}</b> · ${st ? st[0] : "kerak emas, o'tkazib yuborildi"}</span><span class="t">${st ? st[1] : ''}</span></div>`;
+    }).join('');
+    chat.appendChild(list);
+    const rows = list.querySelectorAll('.step');
+    for (const r of rows){ await wait(380); if (id !== run) return; r.classList.add('on'); }
+    await wait(300); if (id !== run) return;
+    const a = document.createElement('div'); a.className = 'answer';
+    a.innerHTML = s.answer + `<div class="meta">${s.chips.map(c => `<span class="chip ${c[0]}">${c[1]}</span>`).join('')}</div>`;
+    chat.appendChild(a);
+  }
+  btns.forEach(b => b.addEventListener('click', () => play(+b.dataset.i)));
+  // Sahifa ochilganda to'liq holat ko'rinsin (animatsiyasiz)
+  (function still(){
+    const s = S[0];
+    chat.innerHTML = `<div class="msg-user"></div>`;
+    chat.firstChild.textContent = s.q;
+    const list = document.createElement('div'); list.className='steps';
+    list.innerHTML = STEPS.map((n,k)=>{const st=s.steps[k];return `<div class="step on${st?'':' skip'}"><span class="dot">${st?'✓':'–'}</span><span><b>${n}</b> · ${st?st[0]:"kerak emas, o'tkazib yuborildi"}</span><span class="t">${st?st[1]:''}</span></div>`}).join('');
+    chat.appendChild(list);
+    const a=document.createElement('div');a.className='answer';a.innerHTML=s.answer+`<div class="meta">${s.chips.map(c=>`<span class="chip ${c[0]}">${c[1]}</span>`).join('')}</div>`;chat.appendChild(a);
+  })();
+})();
+</script>
+
+</body></html>
